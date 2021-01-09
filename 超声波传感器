@@ -1,0 +1,22 @@
+const int TrigPin=8;
+const int EchoPin=9;
+float cm;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode (TrigPin,OUTPUT);
+  pinMode (EchoPin,INPUT);
+}
+void loop()
+{
+  digitalWrite (TrigPin,LOW);//用低高低电平发送脉冲给TrigPin
+  delayMicroseconds(2);//微秒级延时
+  digitalWrite (EchoPin,HIGH);
+  delayMicroseconds(10);
+  digitalWrite (TrigPin,LOW);
+  cm=pulseIn(EchoPin,HIGH)/58.0;//读取脉冲宽度，换算成厘米
+  Serial.print(cm);
+  Serial.print("cm");
+  Serial.println();
+  delay (1000);
+}
